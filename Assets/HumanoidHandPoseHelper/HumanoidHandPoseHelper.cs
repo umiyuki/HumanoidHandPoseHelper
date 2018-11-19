@@ -106,6 +106,18 @@ public class HumanoidHandPoseHelper : MonoBehaviour {
             {"Right Little 3 Stretched", 0f},
     };
 
+#if UNITY_EDITOR
+    private void OnEnable()
+    {
+        EditorApplication.update += EditorUpdate;
+    }
+
+    private void OnDisable()
+    {
+        EditorApplication.update -= EditorUpdate;
+    }
+#endif
+
     private void Start()
     {
         Reset();
@@ -118,7 +130,7 @@ public class HumanoidHandPoseHelper : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void EditorUpdate () {
         if (!isShowEditHandPose) { return; }
         if (animator == null) { return; }
 
